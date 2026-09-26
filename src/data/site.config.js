@@ -68,7 +68,7 @@ export const site = {
       title: "Mandap Sthapana & Haldi",
       date: "30 November 2026",
       time: "10:00 AM",
-      venue: "Kusum Villa",
+      venue: "Kusum Villa ",
       note: "Mandap preparation and Haldi ceremony with family.",
       accent: "marigold",
       mapsUrl: "https://www.google.com/maps/dir//kale+ki+chakki,+Rajiv+Nagar,+Telibagh,+Lucknow,+Uttar+Pradesh+226002/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x399bfb7d38fca7c5:0xabed487bce912f94?sa=X&ved=1t:707&ictx=111",
