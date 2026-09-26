@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { site } from "./data/site.config";
 import { scrollToHash } from "./lib/scrollToHash";
 import { useTranslation } from "./lib/useTranslation";
 import { Hero } from "./components/Hero";

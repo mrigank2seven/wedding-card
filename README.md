@@ -2,7 +2,7 @@
 
 A single-page, config-driven wedding website built with Vite, React, Tailwind CSS v4, and Motion. It deploys to GitHub Pages.
 
-[Hosted website](https://Rupalij22.github.io/wedding-invitation/)
+[Hosted website](https://rupaliwedssumit.vercel.app/)
 
 ## Edit the site (non-technical)
 

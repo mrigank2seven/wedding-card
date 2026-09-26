@@ -3,19 +3,26 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const LanguageContext = createContext()
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en')
+  const [language, setLanguage] = useState(() => {
+    try {
+      return localStorage.getItem('language') || 'en'
+    } catch {
+      return 'en'
+    }
+  })
 
   useEffect(() => {
-    const saved = localStorage.getItem('language')
-    if (saved) {
-      setLanguage(saved)
-    }
-  }, [])
+    document.documentElement.lang = language === 'hi' ? 'hi' : 'en'
+  }, [language])
 
   const toggleLanguage = () => {
     const newLang = language === 'en' ? 'hi' : 'en'
     setLanguage(newLang)
-    localStorage.setItem('language', newLang)
+    try {
+      localStorage.setItem('language', newLang)
+    } catch {
+      console.warn('Failed to save language preference to localStorage')
+    }
   }
 
   return (

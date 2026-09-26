@@ -45,6 +45,7 @@ export function BottomNav() {
                       ? "bg-accent-deep text-page shadow-md"
                       : "bg-gold/10 text-accent-deep hover:bg-gold/20"
                   }`}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {t.nav[item.id]}
                 </a>

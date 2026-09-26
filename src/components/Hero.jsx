@@ -3,7 +3,7 @@ import { useTranslation } from "../lib/useTranslation";
 import { CornerMandala, FallingPetals } from "./Florals";
 
 export function Hero() {
-  const { couple, displayDate, city, hero } = site;
+  const { couple, displayDate, city } = site;
   const t = useTranslation();
 
   return (

@@ -4,35 +4,51 @@ import { useTranslation } from "../lib/useTranslation";
 import { asset } from "../lib/asset";
 import { Icon } from "./Icon";
 
+const SKIP_INTRO_SECONDS = 20;
+
 export function MusicToggle() {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const { music } = site;
   const t = useTranslation();
 
+  const playAudio = (skipIntro = true) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (skipIntro) {
+      audio.currentTime = SKIP_INTRO_SECONDS;
+    }
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setPlaying(true))
+        .catch(() => setPlaying(false));
+    }
+  };
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const playAudio = () => {
-      audio.currentTime = 20;
-      const playPromise = audio.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => setPlaying(true))
-          .catch((error) => {
-            console.log("Autoplay failed - browser policy restricts autoplay:", error.name);
-            setPlaying(false);
-          });
-      }
+    const handleFirstInteraction = () => {
+      playAudio(true);
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("touchstart", handleFirstInteraction);
     };
 
     if (audio.readyState >= 2) {
-      playAudio();
+      playAudio(true);
     } else {
-      audio.addEventListener("canplay", playAudio, { once: true });
-      return () => audio.removeEventListener("canplay", playAudio);
+      audio.addEventListener("canplay", () => playAudio(true), { once: true });
+      document.addEventListener("click", handleFirstInteraction, { once: true });
+      document.addEventListener("touchstart", handleFirstInteraction, { once: true });
+      return () => {
+        audio.removeEventListener("canplay", () => playAudio(true));
+        document.removeEventListener("click", handleFirstInteraction);
+        document.removeEventListener("touchstart", handleFirstInteraction);
+      };
     }
   }, []);
 
@@ -46,18 +62,12 @@ export function MusicToggle() {
       return;
     }
 
-    audio.currentTime = 20;
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => setPlaying(true))
-        .catch((error) => {
-          console.error("Play failed:", error);
-          setPlaying(false);
-        });
-    }
+    playAudio(false);
   }
+
+  const handleAudioError = () => {
+    setPlaying(false);
+  };
 
   return (
     <div className="fixed right-4 bottom-24 z-40">
@@ -67,6 +77,7 @@ export function MusicToggle() {
         preload="auto"
         loop
         crossOrigin="anonymous"
+        onError={handleAudioError}
       />
       <button
         type="button"

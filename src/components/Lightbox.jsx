@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { asset } from "../lib/asset";
 import { useTranslation } from "../lib/useTranslation";
 import { Icon } from "./Icon";
@@ -6,6 +6,7 @@ import { Icon } from "./Icon";
 export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
   const photo = photos[index];
   const t = useTranslation();
+  const closeButtonRef = useRef(null);
 
   useEffect(() => {
     const previous = document.body.style.overflow;
@@ -17,6 +18,7 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
       if (event.key === "ArrowRight") onNext();
     }
 
+    closeButtonRef.current?.focus();
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = previous;
@@ -59,6 +61,7 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
             <Icon name="chevronLeft" />
           </button>
           <button
+            ref={closeButtonRef}
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-page text-ink"
             onClick={onClose}

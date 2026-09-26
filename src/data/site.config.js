@@ -16,7 +16,7 @@ export const site = {
   meta: {
     title: "Rupali & Sumit — We're getting married",
     description:
-      "Join Rupali and Sumit in Ravatbhata on 02 December 2026. Ceremony, celebrations, and all the details.",
+      "Join Rupali and Sumit in Lucknow on 02 December 2026. Ceremony, celebrations, and all the details.",
   },
   couple: {
     partnerA: "Rupali",
@@ -41,7 +41,7 @@ export const site = {
     eyebrow: "A note from us",
     heading: "Please celebrate with us",
     paragraphs: [
-      "We fell in love between shared playlists, late-night walks, and a thousand small kindnesses. On a bright winter afternoon in Ravatbhata, we will promise each other a lifetime of the same.",
+      "We fell in love between shared playlists, late-night walks, and a thousand small kindnesses. On a bright winter afternoon in Lucknow, we will promise each other a lifetime of the same.",
       "Your presence is the gift we want most. Come for the colour, stay for the dancing, and help us begin this next chapter surrounded by the people we love.",
     ],
     signOff: "With all our love",

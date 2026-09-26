@@ -16,8 +16,8 @@ export function Invitation() {
         <h2 className="mt-3 font-display text-4xl font-semibold text-ink md:text-5xl">
           {t.invitation.heading}
         </h2>
-        {t.invitation.paragraphs.map((paragraph) => (
-          <p key={paragraph.slice(0, 24)} className="mt-5 text-base leading-7 text-muted">
+        {t.invitation.paragraphs.map((paragraph, index) => (
+          <p key={index} className="mt-5 text-base leading-7 text-muted">
             {paragraph}
           </p>
         ))}

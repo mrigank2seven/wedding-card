@@ -11,7 +11,7 @@ export const translations = {
       eyebrow: "A note from us",
       heading: "Please celebrate with us",
       paragraphs: [
-        "We fell in love between shared playlists, late-night walks, and a thousand small kindnesses. On a bright winter afternoon in Ravatbhata, we will promise each other a lifetime of the same.",
+        "We fell in love between shared playlists, late-night walks, and a thousand small kindnesses. On a bright winter afternoon in Lucknow, we will promise each other a lifetime of the same.",
         "Your presence is the gift we want most. Come for the colour, stay for the dancing, and help us begin this next chapter surrounded by the people we love.",
       ],
       signOff: "With all our love",
@@ -53,10 +53,10 @@ export const translations = {
       heading: "The wedding venue",
       name: "The Maharaja Inn",
       directions:
-        "The palace sits just south of the old city. From Jaipur International Airport it is about a 25-minute drive. Valet will be waiting at the main gate; rideshare drop-off is the same entrance.",
+        "It is approximately a 15 to 20-minute drive (around 7.5 to 8 km) from Chaudhary Charan Singh International Airport (LKO). Rideshares can easily pull up right to the front gate for pick-ups and drop-offs.",
       mapsCta: "Open in Google Maps",
       loadMapLabel: "Load the map",
-      mapTitle: "Map of The Maharaja Inn, Jaipur",
+      mapTitle: "Map of The Maharaja Inn, Lucknow",
     },
     gallery: {
       eyebrow: "A few frames",
@@ -71,24 +71,18 @@ export const translations = {
       crafted: "With love, from our little corner of the internet.",
     },
     nav: {
-      home: "Home",
-      invite: "Invite",
-      when: "When",
-      events: "Events",
+      hero: "Home",
+      invitation: "Invite",
+      countdown: "When",
+      lineup: "Events",
       venue: "Venue",
-      photos: "Photos",
+      gallery: "Photos",
     },
   },
   hi: {
     skipLink: "सामग्री पर जाएं",
     playMusic: "संगीत चलाएं",
     pauseMusic: "संगीत रोकें",
-    couple: {
-      partnerA: "रुपाली",
-      partnerB: "सुमित",
-    },
-    weddingDate: "02 दिसंबर 2026",
-    city: "लखनऊ, उत्तर प्रदेश",
     hero: {
       kicker: "उनके परिवार के साथ",
       ctaLabel: "निमंत्रण खोलें",
@@ -137,12 +131,12 @@ export const translations = {
     venue: {
       eyebrow: "हमें खोजें",
       heading: "विवाह समारोह का स्थान",
-      name: "राम बाग पैलेस",
+      name: "द महाराजा इन",
       directions:
-        "महल पुरानी शहर के दक्षिण में स्थित है। जयपुर अंतर्राष्ट्रीय हवाई अड्डे से लगभग 25 मिनट की ड्राइव है। वलेट मुख्य द्वार पर प्रतीक्षा करेगा; राइडशेयर ड्रॉप-ऑफ एक ही प्रवेश है।",
+        "यह चौधरी चरण सिंह अंतर्राष्ट्रीय हवाई अड्डे (लखनऊ) से लगभग 15 से 20 मिनट की ड्राइव है। राइडशेयर सीधे मुख्य द्वार पर पहुँच सकते हैं।",
       mapsCta: "गूगल मैप्स में खोलें",
       loadMapLabel: "नक्शा लोड करें",
-      mapTitle: "राम बाग पैलेस, जयपुर का नक्शा",
+      mapTitle: "द महाराजा इन, लखनऊ का नक्शा",
     },
     gallery: {
       eyebrow: "कुछ फ्रेम",
@@ -157,12 +151,12 @@ export const translations = {
       crafted: "प्यार के साथ, हमारे इंटरनेट के कोने से।",
     },
     nav: {
-      home: "होम",
-      invite: "निमंत्रण",
-      when: "कब",
-      events: "कार्यक्रम",
+      hero: "होम",
+      invitation: "निमंत्रण",
+      countdown: "कब",
+      lineup: "कार्यक्रम",
       venue: "स्थान",
-      photos: "फोटो",
+      gallery: "फोटो",
     },
   },
 };
