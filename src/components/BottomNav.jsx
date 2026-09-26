@@ -29,19 +29,21 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-4 left-1/2 z-40 w-[min(100%-1rem,36rem)] -translate-x-1/2"
+      className="fixed bottom-4 left-1/2 z-40 w-[min(100%-1rem,55rem)] -translate-x-1/2"
       aria-label="Page sections"
     >
-      <div className="nav-scroll rounded-full border border-gold/30 bg-page/95 px-2 py-1 shadow-lg backdrop-blur">
-        <ul className="flex min-w-max items-center justify-between gap-1">
+      <div className="nav-scroll rounded-full border border-gold/30 bg-page/95 px-1 py-1 shadow-lg backdrop-blur">
+        <ul className="flex min-w-max items-center justify-center gap-0.5">
           {navItems.map((item) => {
             const isActive = active === item.id;
             return (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 text-xs font-medium whitespace-nowrap sm:text-sm ${
-                    isActive ? "bg-accent-deep text-page" : "text-ink"
+                  className={`inline-flex h-10 min-w-10 items-center justify-center rounded-full px-2 text-xs font-medium whitespace-nowrap transition-all ${
+                    isActive
+                      ? "bg-accent-deep text-page shadow-md"
+                      : "bg-gold/10 text-accent-deep hover:bg-gold/20"
                   }`}
                 >
                   {t.nav[item.id]}

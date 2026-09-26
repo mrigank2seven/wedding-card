@@ -14,6 +14,40 @@ Change names, the hashtag, dates, invitation copy, event line-up, venue, photos,
 
 Keep `navItems[].id` in sync with section ids (`hero`, `invitation`, `countdown`, `lineup`, `venue`, `gallery`).
 
+## Bilingual Support (English & Hindi)
+
+The site supports **English and Hindi** with an instant language toggle in the top-right corner.
+
+### Edit translations
+
+All translations live in:
+
+[`src/lib/translations.js`](src/lib/translations.js)
+
+The file contains two language objects: `en` and `hi`. Update text strings in both languages:
+
+```js
+// English
+events: {
+  mandap: {
+    title: "Mandap Sthapana & Haldi",
+    note: "Mandap preparation and Haldi ceremony with family.",
+  },
+}
+```
+
+```js
+// Hindi
+events: {
+  mandap: {
+    title: "मंडप स्थापना और हल्दी",
+    note: "मंडप की तैयारी और परिवार के साथ हल्दी समारोह।",
+  },
+}
+```
+
+**English is the default language.** Users toggle to Hindi via the top-right button. Choice is saved to `localStorage` and persists across reloads.
+
 Also update `siteUrl` and `meta` in that file so WhatsApp / Open Graph previews point at your live GitHub Pages URL.
 
 ## Swap photos
@@ -70,6 +104,16 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 npm run build
 npm run preview
 ```
+
+## Language Toggle
+
+A language toggle button appears in the top-right corner of the site:
+- Click to switch between English and Hindi instantly
+- Current language preference is saved to browser storage
+- Persists across page reloads and browser sessions
+- Styled to match the wedding theme
+
+The toggle is implemented via React Context (`LanguageContext`) and a custom hook (`useTranslation`).
 
 ## Preview themes
 
