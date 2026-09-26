@@ -1,4 +1,9 @@
 import { motion, useReducedMotion } from "motion/react";
+import { useState, useEffect } from "react";
+
+const LIGHT_THEMES = ["marigold", "ruby", "emerald", "sapphire", "lotus"];
+
+const isLightTheme = (theme) => LIGHT_THEMES.includes(theme);
 
 export function CornerMandala({ className = "" }) {
   const reduce = useReducedMotion();
@@ -110,6 +115,23 @@ const PETALS = [
 ];
 
 export function FallingPetals() {
+  const [isLight, setIsLight] = useState(true);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = document.documentElement.getAttribute("data-theme") || "marigold";
+      setIsLight(isLightTheme(theme));
+    };
+
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  if (!isLight) return null;
+
   return (
     <div className="falling-petals pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {PETALS.map((petal) => (
