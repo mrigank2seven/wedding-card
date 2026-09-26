@@ -38,16 +38,24 @@ export function MusicToggle() {
       document.removeEventListener("touchstart", handleFirstInteraction);
     };
 
-    if (audio.readyState >= 2) {
+    const attemptPlay = () => {
       playAudio(true);
-    } else {
-      audio.addEventListener("canplay", () => playAudio(true), { once: true });
-    }
+    };
+
+    const timer = setTimeout(() => {
+      if (audio.readyState >= 2) {
+        attemptPlay();
+      } else {
+        audio.addEventListener("canplay", attemptPlay, { once: true });
+      }
+    }, 100);
 
     document.addEventListener("click", handleFirstInteraction, { once: true });
     document.addEventListener("touchstart", handleFirstInteraction, { once: true });
 
     return () => {
+      clearTimeout(timer);
+      audio.removeEventListener("canplay", attemptPlay);
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
     };
@@ -80,7 +88,6 @@ export function MusicToggle() {
         crossOrigin="anonymous"
         onError={handleAudioError}
         muted
-        autoPlay
       >
         <track kind="captions" srcLang="en" label="English captions" />
       </audio>
