@@ -40,7 +40,12 @@ export function MusicToggle() {
     const audio = audioRef.current;
     if (!audio) return;
 
+    let autoplayAttempted = false;
+
     const attemptAutoplay = () => {
+      if (autoplayAttempted) return;
+      autoplayAttempted = true;
+
       if (!audio) return;
       audio.muted = true;
       audio.currentTime = SKIP_INTRO_SECONDS;
@@ -54,7 +59,8 @@ export function MusicToggle() {
               audio.muted = false;
             }, 100);
           })
-          .catch(() => {
+          .catch((error) => {
+            console.warn("Autoplay blocked by browser:", error.message);
             setPlaying(false);
           });
       }
@@ -92,7 +98,7 @@ export function MusicToggle() {
       document.removeEventListener("touchstart", handleFirstInteraction);
       document.removeEventListener("keydown", handleFirstInteraction);
     };
-  }, [playing]);
+  }, []);
 
   function toggle() {
     const audio = audioRef.current;
