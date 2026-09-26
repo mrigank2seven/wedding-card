@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
 
 interface HeroProps {
   onOpen: () => void
@@ -7,127 +6,135 @@ interface HeroProps {
 
 export default function Hero({ onOpen }: HeroProps) {
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-wine-950 via-wine-900 to-wine-800 overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-40 -left-40 w-80 h-80 bg-gold rounded-full mix-blend-overlay opacity-10 blur-3xl"
-        />
-        <motion.div
-          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -bottom-40 -right-40 w-96 h-96 bg-wine-700 rounded-full mix-blend-overlay opacity-10 blur-3xl"
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Burgundy fabric background */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, #5a3a2e 0%, #6b4423 25%, #704436 50%, #6b4423 75%, #5a3a2e 100%)',
+        }}
+      >
+        {/* Fabric texture overlay */}
+        <div 
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)'
+          }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 max-w-2xl w-full">
-        {/* Top text */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 w-full h-full">
+        {/* "Tap to Reveal" text */}
+        <motion.p
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-8 sm:mb-12"
+          transition={{ duration: 1, delay: 0.3 }}
+          className="script-font text-4xl sm:text-5xl md:text-6xl text-amber-50 mb-16 sm:mb-20 md:mb-24 font-light tracking-wide"
+          style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1)',
+            fontStyle: 'italic'
+          }}
         >
-          <p className="text-gold text-sm sm:text-base tracking-widest uppercase font-sans font-light">
-            You Are Invited
-          </p>
-        </motion.div>
+          Tap to Reveal
+        </motion.p>
 
-        {/* Main heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-12 sm:mb-16 text-center"
-        >
-          <h1 className="text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 leading-tight">
-            Shri Amit Gupta
-          </h1>
-          <p className="text-gold text-lg sm:text-xl tracking-wider">weds</p>
-        </motion.div>
-
-        {/* Wax Seal Button */}
+        {/* Wax Seal */}
         <motion.button
           onClick={onOpen}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          className="group mx-auto mb-12 sm:mb-16 focus:outline-none focus:ring-4 focus:ring-gold focus:ring-offset-4 focus:ring-offset-wine-900 rounded-full transition-all"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          className="group relative mb-20 sm:mb-24 md:mb-32 focus:outline-none focus:ring-0 transition-all cursor-pointer"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72"
+            transition={{ duration: 1.2, delay: 0.5, type: 'spring', stiffness: 100 }}
+            className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80"
           >
-            {/* Wax seal with 3D effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cream via-cream to-yellow-100 rounded-full shadow-2xl flex items-center justify-center overflow-hidden">
-              {/* Border decoration */}
-              <div className="absolute inset-3 sm:inset-4 border-3 border-gold rounded-full opacity-70"></div>
-              <div className="absolute inset-6 sm:inset-8 border border-gold rounded-full opacity-40"></div>
+            {/* Shadow for depth */}
+            <div className="absolute inset-0 rounded-full" style={{
+              boxShadow: '0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(0,0,0,0.2), inset 2px 2px 5px rgba(255,255,255,0.3)'
+            }} />
 
-              {/* Center content */}
-              <div className="text-center z-10">
-                <p className="script-font text-6xl sm:text-7xl md:text-8xl text-wine-900 leading-none font-bold">
+            {/* Main seal body */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-50 via-amber-100 to-yellow-50 overflow-hidden flex items-center justify-center">
+              {/* Highlight */}
+              <div className="absolute top-4 left-6 w-20 h-20 rounded-full bg-white opacity-30 blur-xl" />
+              
+              {/* SVG decorations */}
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200" style={{ filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.1))' }}>
+                <circle cx="100" cy="100" r="95" fill="none" stroke="#c4a57b" strokeWidth="1" opacity="0.6" />
+                <g opacity="0.5">
+                  <path d="M 60 30 Q 70 25, 80 30 Q 90 35, 100 32 Q 110 35, 120 30 Q 130 25, 140 30" fill="none" stroke="#a0826d" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M 60 170 Q 70 175, 80 170 Q 90 165, 100 168 Q 110 165, 120 170 Q 130 175, 140 170" fill="none" stroke="#a0826d" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="45" cy="45" r="8" fill="none" stroke="#a0826d" strokeWidth="1" />
+                  <circle cx="155" cy="45" r="8" fill="none" stroke="#a0826d" strokeWidth="1" />
+                  <circle cx="45" cy="155" r="8" fill="none" stroke="#a0826d" strokeWidth="1" />
+                  <circle cx="155" cy="155" r="8" fill="none" stroke="#a0826d" strokeWidth="1" />
+                </g>
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#c4a57b" strokeWidth="1.5" opacity="0.7" />
+              </svg>
+
+              {/* Center initials */}
+              <div className="relative z-10 text-center">
+                <p className="script-font text-8xl md:text-9xl text-amber-800 font-bold leading-none" 
+                   style={{
+                     textShadow: '1px 1px 2px rgba(0,0,0,0.15), -1px -1px 2px rgba(255,255,255,0.3)',
+                     fontStyle: 'italic'
+                   }}>
                   A&R
-                </p>
-                <p className="text-gold text-xs sm:text-sm tracking-widest mt-2 sm:mt-4 font-sans font-semibold">
-                  WEDDING
                 </p>
               </div>
 
               {/* Shine effect */}
               <motion.div
-                animate={{ opacity: [0, 0.3, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute inset-0 bg-gradient-to-tr from-transparent via-white to-transparent rounded-full"
+                animate={{ opacity: [0.1, 0.3, 0.1] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute top-8 left-8 w-24 h-24 rounded-full bg-white opacity-20 blur-2xl"
               />
             </div>
 
-            {/* Pulsing ring */}
+            {/* Pulsing halo */}
             <motion.div
-              animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.2, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute inset-0 border-2 border-gold rounded-full"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 0.2, 0.5]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute -inset-4 rounded-full border-2 border-amber-300"
+              style={{ boxShadow: 'inset 0 0 20px rgba(217, 119, 6, 0.3)' }}
             />
           </motion.div>
         </motion.button>
 
-        {/* Call to action text */}
+        {/* Subtitle */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.8, delay: 1 }}
+          className="text-center"
         >
-          <p className="script-font text-3xl sm:text-4xl md:text-5xl text-cream mb-3 font-light">
-            Tap to Reveal
-          </p>
-          <p className="text-gold text-xs sm:text-sm tracking-widest uppercase font-semibold">
-            Your Invitation Awaits
+          <p className="text-amber-100 text-sm sm:text-base tracking-widest uppercase font-light opacity-80">
+            An Invitation to Celebrate
           </p>
         </motion.div>
-
-        {/* Subtle CTA button */}
-        <motion.button
-          onClick={onOpen}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-6 sm:px-8 py-3 border-2 border-gold text-gold hover:bg-gold hover:text-wine-900 transition-all font-sans font-semibold text-sm uppercase tracking-wider rounded-full mb-8"
-        >
-          Open Invitation
-        </motion.button>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gold"
+        transition={{ duration: 2.5, repeat: Infinity }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center"
       >
-        <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8" />
+        <div className="text-amber-100 text-xs tracking-widest uppercase opacity-60 mb-2">Scroll</div>
+        <motion.div
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-amber-100 text-xl"
+        >
+          ↓
+        </motion.div>
       </motion.div>
     </section>
   )
