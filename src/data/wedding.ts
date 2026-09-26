@@ -54,12 +54,14 @@ export const weddingData: WeddingData = {
     bride: {
       name: 'Bride Name',
       nickname: 'Bride',
+      image: '/images/Image1.jpeg',
       parentsMother: 'Mrs. [Mother]',
       parentsFather: 'Mr. [Father]',
     },
     groom: {
       name: 'Groom Name',
       nickname: 'Groom',
+      image: '/images/Image2.jpeg',
       parentsMother: 'Mrs. [Mother]',
       parentsFather: 'Mr. [Father]',
     },
@@ -141,5 +143,10 @@ export const weddingData: WeddingData = {
       description: 'Today, we start our forever journey together.',
     },
   ],
-  gallery: [],
+  gallery: [
+    '/images/Image1.jpeg',
+    '/images/Image2.jpeg',
+    '/images/Image3.jpeg',
+    '/images/Image4.jpeg',
+  ],
 }

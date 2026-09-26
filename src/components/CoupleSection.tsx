@@ -3,11 +3,13 @@ import { motion } from 'framer-motion'
 interface Couple {
   bride: {
     name: string
+    image?: string
     parentsMother: string
     parentsFather: string
   }
   groom: {
     name: string
+    image?: string
     parentsMother: string
     parentsFather: string
   }
@@ -44,9 +46,17 @@ export default function CoupleSection({ couple }: CoupleProps) {
             className="text-center"
           >
             <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 bg-gradient-to-br from-wine-200 to-wine-300 rounded-full overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
-                <span className="text-wine-800 text-5xl">👰</span>
-              </div>
+              {couple.bride.image ? (
+                <img
+                  src={couple.bride.image}
+                  alt={couple.bride.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
+                  <span className="text-wine-800 text-5xl">👰</span>
+                </div>
+              )}
             </div>
             <h3 className="text-3xl md:text-4xl font-serif text-wine-900 mb-2">
               {couple.bride.name}
@@ -77,9 +87,17 @@ export default function CoupleSection({ couple }: CoupleProps) {
             className="text-center md:col-start-2 md:row-start-1"
           >
             <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 bg-gradient-to-br from-wine-200 to-wine-300 rounded-full overflow-hidden shadow-lg">
-              <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
-                <span className="text-wine-800 text-5xl">🤵</span>
-              </div>
+              {couple.groom.image ? (
+                <img
+                  src={couple.groom.image}
+                  alt={couple.groom.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
+                  <span className="text-wine-800 text-5xl">🤵</span>
+                </div>
+              )}
             </div>
             <h3 className="text-3xl md:text-4xl font-serif text-wine-900 mb-2">
               {couple.groom.name}

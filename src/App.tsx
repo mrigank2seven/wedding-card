@@ -6,6 +6,7 @@ import WeddingDetails from './components/WeddingDetails'
 import Countdown from './components/Countdown'
 import Events from './components/Events'
 import Story from './components/Story'
+import Gallery from './components/Gallery'
 import Venue from './components/Venue'
 import RSVP from './components/RSVP'
 import Footer from './components/Footer'
@@ -43,6 +44,7 @@ export default function App() {
           <Countdown targetDate={weddingData.weddingDate} />
           <Events events={weddingData.events} />
           {weddingData.story && <Story timeline={weddingData.story} />}
+          {weddingData.gallery && weddingData.gallery.length > 0 && <Gallery images={weddingData.gallery} />}
           <Venue venue={weddingData.venue} />
           <RSVP />
           <Footer couple={weddingData.couple} />
