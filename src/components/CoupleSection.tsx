@@ -37,7 +37,7 @@ export default function CoupleSection({ couple }: CoupleProps) {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid sm:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Bride */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -45,26 +45,36 @@ export default function CoupleSection({ couple }: CoupleProps) {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 bg-gradient-to-br from-wine-200 to-wine-300 rounded-full overflow-hidden shadow-lg">
-              {couple.bride.image ? (
-                <img
-                  src={couple.bride.image}
-                  alt={couple.bride.name}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
-                  <span className="text-wine-800 text-5xl">👰</span>
-                </div>
-              )}
+            <div className="relative mb-6 md:mb-8 inline-block group">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="w-48 sm:w-56 h-48 sm:h-56 mx-auto bg-gradient-to-br from-wine-200 to-wine-300 rounded-full overflow-hidden shadow-xl ring-4 ring-gold ring-opacity-30"
+              >
+                {couple.bride.image ? (
+                  <img
+                    src={couple.bride.image}
+                    alt={couple.bride.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
+                    <span className="text-wine-800 text-5xl">👰</span>
+                  </div>
+                )}
+              </motion.div>
+              <motion.div
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -inset-1 bg-gold rounded-full opacity-20 blur-xl -z-10"
+              />
             </div>
-            <h3 className="text-3xl md:text-4xl font-serif text-wine-900 mb-2">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-wine-900 mb-2 font-bold">
               {couple.bride.name}
             </h3>
-            <p className="text-gray-600 text-sm mb-4">
+            <p className="text-wine-600 text-xs sm:text-sm mb-4 font-semibold">
               {couple.bride.parentsMother} & {couple.bride.parentsFather}
             </p>
-            <p className="text-wine-700 italic">
+            <p className="text-wine-700 italic text-sm sm:text-base">
               A woman of grace, strength, and infinite love.
             </p>
           </motion.div>
@@ -74,9 +84,15 @@ export default function CoupleSection({ couple }: CoupleProps) {
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hidden md:flex justify-center"
+            className="hidden sm:flex justify-center col-span-2 sm:col-span-1"
           >
-            <div className="text-6xl text-gold">💕</div>
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-5xl sm:text-6xl text-gold"
+            >
+              💕
+            </motion.div>
           </motion.div>
 
           {/* Groom */}
@@ -84,28 +100,38 @@ export default function CoupleSection({ couple }: CoupleProps) {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center md:col-start-2 md:row-start-1"
+            className="text-center sm:col-start-2 sm:row-start-1"
           >
-            <div className="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 bg-gradient-to-br from-wine-200 to-wine-300 rounded-full overflow-hidden shadow-lg">
-              {couple.groom.image ? (
-                <img
-                  src={couple.groom.image}
-                  alt={couple.groom.name}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
-                  <span className="text-wine-800 text-5xl">🤵</span>
-                </div>
-              )}
+            <div className="relative mb-6 md:mb-8 inline-block group">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="w-48 sm:w-56 h-48 sm:h-56 mx-auto bg-gradient-to-br from-wine-200 to-wine-300 rounded-full overflow-hidden shadow-xl ring-4 ring-gold ring-opacity-30"
+              >
+                {couple.groom.image ? (
+                  <img
+                    src={couple.groom.image}
+                    alt={couple.groom.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-wine-400 opacity-30 flex items-center justify-center">
+                    <span className="text-wine-800 text-5xl">🤵</span>
+                  </div>
+                )}
+              </motion.div>
+              <motion.div
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute -inset-1 bg-gold rounded-full opacity-20 blur-xl -z-10"
+              />
             </div>
-            <h3 className="text-3xl md:text-4xl font-serif text-wine-900 mb-2">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-wine-900 mb-2 font-bold">
               {couple.groom.name}
             </h3>
-            <p className="text-gray-600 text-sm mb-4">
+            <p className="text-wine-600 text-xs sm:text-sm mb-4 font-semibold">
               {couple.groom.parentsMother} & {couple.groom.parentsFather}
             </p>
-            <p className="text-wine-700 italic">
+            <p className="text-wine-700 italic text-sm sm:text-base">
               A gentleman of wisdom, kindness, and devoted heart.
             </p>
           </motion.div>
