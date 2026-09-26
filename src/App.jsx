@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { scrollToHash } from "./lib/scrollToHash";
 import { useTranslation } from "./lib/useTranslation";
+import { FallingPetals } from "./components/Florals";
 import { Hero } from "./components/Hero";
 import { Invitation } from "./components/Invitation";
 import { Countdown } from "./components/Countdown";
@@ -22,6 +23,7 @@ export default function App() {
 
   return (
     <>
+      <FallingPetals />
       <a className="skip-link" href="#invitation">
         {t.skipLink}
       </a>

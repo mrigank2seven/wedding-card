@@ -40,31 +40,56 @@ export function MusicToggle() {
     const audio = audioRef.current;
     if (!audio) return;
 
+    const attemptAutoplay = () => {
+      if (!audio) return;
+      audio.currentTime = SKIP_INTRO_SECONDS;
+      const playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setPlaying(true);
+            audio.muted = false;
+          })
+          .catch(() => {
+            setPlaying(false);
+          });
+      }
+    };
+
     const handleFirstInteraction = () => {
-      audio.muted = false;
-      playAudio(false);
+      if (!playing) {
+        audio.muted = false;
+        playAudio(false);
+      }
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
     };
 
     const handleCanPlay = () => {
-      playAudio(true);
+      attemptAutoplay();
     };
 
     audio.addEventListener("canplay", handleCanPlay, { once: true });
     document.addEventListener("click", handleFirstInteraction, { once: true });
     document.addEventListener("touchstart", handleFirstInteraction, { once: true });
+    document.addEventListener("keydown", handleFirstInteraction, { once: true });
 
     if (audio.readyState >= 2) {
-      playAudio(true);
+      attemptAutoplay();
+    } else {
+      const timer = setTimeout(attemptAutoplay, 50);
+      return () => clearTimeout(timer);
     }
 
     return () => {
       audio.removeEventListener("canplay", handleCanPlay);
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
     };
-  }, []);
+  }, [playing]);
 
   function toggle() {
     const audio = audioRef.current;

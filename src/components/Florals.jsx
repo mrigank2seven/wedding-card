@@ -116,6 +116,7 @@ const PETALS = [
 
 export function FallingPetals() {
   const [isLight, setIsLight] = useState(true);
+  const [hideInCountdown, setHideInCountdown] = useState(false);
 
   useEffect(() => {
     const checkTheme = () => {
@@ -130,10 +131,36 @@ export function FallingPetals() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const countdownElement = document.getElementById("countdown");
+    if (!countdownElement) return;
+
+    const checkCountdownVisibility = () => {
+      const rect = countdownElement.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      setHideInCountdown(isInViewport);
+    };
+
+    checkCountdownVisibility();
+    window.addEventListener("scroll", checkCountdownVisibility);
+    window.addEventListener("resize", checkCountdownVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", checkCountdownVisibility);
+      window.removeEventListener("resize", checkCountdownVisibility);
+    };
+  }, []);
+
   if (!isLight) return null;
 
   return (
-    <div className="falling-petals pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div
+      className={`falling-petals pointer-events-none fixed inset-0 overflow-hidden transition-opacity duration-300 ${
+        hideInCountdown ? "opacity-0" : "opacity-100"
+      }`}
+      aria-hidden="true"
+      style={{ pointerEvents: "none" }}
+    >
       {PETALS.map((petal) => (
         <span
           key={petal.left}
