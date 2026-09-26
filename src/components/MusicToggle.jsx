@@ -42,6 +42,7 @@ export function MusicToggle() {
 
     const attemptAutoplay = () => {
       if (!audio) return;
+      audio.muted = true;
       audio.currentTime = SKIP_INTRO_SECONDS;
       const playPromise = audio.play();
 
@@ -49,7 +50,9 @@ export function MusicToggle() {
         playPromise
           .then(() => {
             setPlaying(true);
-            audio.muted = false;
+            setTimeout(() => {
+              audio.muted = false;
+            }, 100);
           })
           .catch(() => {
             setPlaying(false);
