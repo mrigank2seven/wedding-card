@@ -1,120 +1,82 @@
-# Wedding Invitation Website
+# Rupali & Sumit — wedding site
 
-A beautiful, production-quality wedding invitation website built with React, TypeScript, Vite, and Tailwind CSS.
+A single-page, config-driven wedding website built with Vite, React, Tailwind CSS v4, and Motion. It deploys to GitHub Pages.
 
-## Features
+[Hosted website](https://Rupalij22.github.io/wedding-invitation/)
 
-- **Elegant Design**: Premium visual language with wine/burgundy color scheme and decorative elements
-- **Responsive**: Fully responsive design for mobile, tablet, and desktop
-- **Smooth Animations**: Subtle animations powered by Framer Motion
-- **Countdown Timer**: Live countdown to the wedding date
-- **Event Management**: Display multiple wedding events (Mehendi, Haldi, Wedding, Reception, etc.)
-- **RSVP Form**: Interactive form with attendance tracking
-- **Love Story Timeline**: Beautiful timeline component for couple's story
-- **Venue Information**: Integrated Google Maps support
-- **Music Control**: Floating music toggle button
-- **Accessibility**: Respects prefers-reduced-motion, semantic HTML, keyboard navigation
-- **Data-Driven**: Centralized wedding data configuration for easy customization
+## Edit the site (non-technical)
 
-## Project Structure
+All guest-facing content lives in **one file**:
 
+[`src/data/site.config.js`](src/data/site.config.js)
+
+Change names, the hashtag, dates, invitation copy, event line-up, venue, photos, music path, footer text, navigation labels, and the default colour theme there. You should not need to edit any React component to launch the site.
+
+Keep `navItems[].id` in sync with section ids (`hero`, `invitation`, `countdown`, `lineup`, `venue`, `gallery`).
+
+Also update `siteUrl` and `meta` in that file so WhatsApp / Open Graph previews point at your live GitHub Pages URL.
+
+## Swap photos
+
+1. Add files under `public/photos/` (JPG, PNG, or SVG).
+2. Update `gallery.photos` in `src/data/site.config.js` with `src`, descriptive `alt`, `width`, and `height`.
+3. Keep `src` relative to `public/`, for example `photos/ceremony.jpg`.
+
+Placeholder SVGs ship so the gallery works before real photographs exist.
+
+Background music: replace `public/music/celebration.wav` or change `music.src` in the config. Music never autoplays; it starts after a tap on the floating control.
+
+## Enable GitHub Pages
+
+1. Push this repository to GitHub.
+2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Push to `main`. The workflow in `.github/workflows/deploy.yml` builds and deploys.
+
+The workflow sets `VITE_BASE_PATH` to `/<repository-name>/`, which is required for **project** sites (`https://<user>.github.io/<repo>/`).
+
+If this is a **user site** (`https://<user>.github.io`), build with `VITE_BASE_PATH=/` instead of deriving the path from the repository name.
+
+## The base-path rule
+
+GitHub Pages project sites serve from `/<repo>/`. If Vite’s `base` does not match, every asset 404s and the page can look blank.
+
+`vite.config.js` uses:
+
+```js
+base: process.env.VITE_BASE_PATH || "/"
 ```
-src/
-├── components/
-│   ├── Hero.tsx              # Welcome/intro section with wax seal
-│   ├── CoupleSection.tsx      # Bride & groom introduction
-│   ├── WeddingDetails.tsx     # Date, time, venue details
-│   ├── Countdown.tsx          # Live countdown timer
-│   ├── Events.tsx             # Wedding events listing
-│   ├── Story.tsx              # Timeline of love story
-│   ├── Venue.tsx              # Venue information with map
-│   ├── RSVP.tsx               # RSVP form
-│   ├── Footer.tsx             # Footer section
-│   └── MusicToggle.tsx        # Background music control
-├── data/
-│   └── wedding.ts             # Centralized wedding data
-├── App.tsx                    # Main app component
-├── main.tsx                   # Entry point
-└── index.css                  # Global styles
-```
 
-## Technology Stack
-
-- **React 19** - UI framework
-- **TypeScript** - Type safety
-- **Vite 8** - Build tool and dev server
-- **Tailwind CSS 4** - Utility-first CSS framework
-- **Framer Motion 13** - Animation library
-- **Lucide React** - Icon library
-
-## Getting Started
-
-### Installation
+Verify locally:
 
 ```bash
-cd /Users/mrigank2seven/Projects/wedding-card
+# PowerShell
+$env:VITE_BASE_PATH="/test/"; npm run build
+```
+
+Then confirm `dist/index.html` references assets under `/test/assets/...`.
+
+## Run locally
+
+```bash
 npm install
-```
-
-### Development
-
-```bash
 npm run dev
 ```
 
-Runs at http://localhost:3000
+Open the URL Vite prints (usually `http://localhost:5173`).
 
-### Build for Production
+## Build
 
 ```bash
 npm run build
+npm run preview
 ```
 
-Output in `dist/` directory.
+## Preview themes
 
-### Type Checking
+Palettes are listed in `site.themes`. The default is `defaultTheme`.
 
-```bash
-npm run type-check
-```
+Append a query parameter:
 
-## Customization
+`http://localhost:5173/?theme=marigold`
 
-Edit `src/data/wedding.ts` with your wedding details:
-
-```typescript
-export const weddingData: WeddingData = {
-  couple: {
-    bride: { name: "Your Name", ... },
-    groom: { name: "Your Name", ... },
-  },
-  weddingDate: "2026-07-14",
-  weddingTime: "6:00 PM",
-  venue: { ... },
-  events: [ ... ],
-  story: [ ... ],
-}
-```
-
-## Browser Support
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers
-
-## Deployment
-
-### Vercel
-```bash
-vercel
-```
-
-### Netlify
-```bash
-netlify deploy
-```
-
-## License
-
-ISC
+Available ids: `marigold`, `ruby`, `emerald`, `sapphire`, `lotus`.
