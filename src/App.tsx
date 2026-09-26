@@ -8,7 +8,6 @@ import Events from './components/Events'
 import Story from './components/Story'
 import Gallery from './components/Gallery'
 import Venue from './components/Venue'
-import RSVP from './components/RSVP'
 import Footer from './components/Footer'
 import MusicToggle from './components/MusicToggle'
 
@@ -46,7 +45,6 @@ export default function App() {
           {weddingData.story && <Story timeline={weddingData.story} />}
           {weddingData.gallery && weddingData.gallery.length > 0 && <Gallery images={weddingData.gallery} />}
           <Venue venue={weddingData.venue} />
-          <RSVP />
           <Footer couple={weddingData.couple} />
         </>
       )}
