@@ -29,11 +29,10 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
   if (!photo) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-band/90 p-4"
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      className="fixed inset-0 z-50 flex items-center justify-center bg-band/90 p-4 backdrop:bg-band/90"
       aria-label={t.gallery.lightboxLabel}
+      open
     >
       <button
         type="button"
@@ -79,6 +78,6 @@ export default function Lightbox({ photos, index, onClose, onPrev, onNext }) {
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

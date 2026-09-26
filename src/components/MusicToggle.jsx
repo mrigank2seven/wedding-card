@@ -33,7 +33,7 @@ export function MusicToggle() {
     if (!audio) return;
 
     const handleFirstInteraction = () => {
-      playAudio(true);
+      audio.muted = false;
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
     };
@@ -42,14 +42,15 @@ export function MusicToggle() {
       playAudio(true);
     } else {
       audio.addEventListener("canplay", () => playAudio(true), { once: true });
-      document.addEventListener("click", handleFirstInteraction, { once: true });
-      document.addEventListener("touchstart", handleFirstInteraction, { once: true });
-      return () => {
-        audio.removeEventListener("canplay", () => playAudio(true));
-        document.removeEventListener("click", handleFirstInteraction);
-        document.removeEventListener("touchstart", handleFirstInteraction);
-      };
     }
+
+    document.addEventListener("click", handleFirstInteraction, { once: true });
+    document.addEventListener("touchstart", handleFirstInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("touchstart", handleFirstInteraction);
+    };
   }, []);
 
   function toggle() {
@@ -78,7 +79,11 @@ export function MusicToggle() {
         loop
         crossOrigin="anonymous"
         onError={handleAudioError}
-      />
+        muted
+        autoPlay
+      >
+        <track kind="captions" srcLang="en" label="English captions" />
+      </audio>
       <button
         type="button"
         onClick={toggle}

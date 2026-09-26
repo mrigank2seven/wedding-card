@@ -38,9 +38,8 @@ function Row({ photos, reverse, onOpen }) {
 export function Gallery() {
   const t = useTranslation();
   const photos = site.gallery.photos;
-  const midpoint = Math.ceil(photos.length / 2);
-  const rowA = photos.slice(0, midpoint);
-  const rowB = photos.slice(midpoint);
+  const rowA = photos;
+  const rowB = photos;
   const [active, setActive] = useState(null);
 
   const onOpen = (photo) => {
