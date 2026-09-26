@@ -16,15 +16,23 @@ export function MusicToggle() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (skipIntro) {
-      audio.currentTime = SKIP_INTRO_SECONDS;
-    }
-    const playPromise = audio.play();
+    try {
+      if (skipIntro) {
+        audio.currentTime = SKIP_INTRO_SECONDS;
+      }
+      const playPromise = audio.play();
 
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => setPlaying(true))
-        .catch(() => setPlaying(false));
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setPlaying(true))
+          .catch((error) => {
+            console.warn("Autoplay blocked by browser:", error.message);
+            setPlaying(false);
+          });
+      }
+    } catch (error) {
+      console.warn("Error attempting to play audio:", error);
+      setPlaying(false);
     }
   };
 
@@ -34,28 +42,25 @@ export function MusicToggle() {
 
     const handleFirstInteraction = () => {
       audio.muted = false;
+      playAudio(false);
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
     };
 
-    const attemptPlay = () => {
+    const handleCanPlay = () => {
       playAudio(true);
     };
 
-    const timer = setTimeout(() => {
-      if (audio.readyState >= 2) {
-        attemptPlay();
-      } else {
-        audio.addEventListener("canplay", attemptPlay, { once: true });
-      }
-    }, 100);
-
+    audio.addEventListener("canplay", handleCanPlay, { once: true });
     document.addEventListener("click", handleFirstInteraction, { once: true });
     document.addEventListener("touchstart", handleFirstInteraction, { once: true });
 
+    if (audio.readyState >= 2) {
+      playAudio(true);
+    }
+
     return () => {
-      clearTimeout(timer);
-      audio.removeEventListener("canplay", attemptPlay);
+      audio.removeEventListener("canplay", handleCanPlay);
       document.removeEventListener("click", handleFirstInteraction);
       document.removeEventListener("touchstart", handleFirstInteraction);
     };
